@@ -8,7 +8,8 @@
     <h2>Список всех фильмов</h2>
     <ul>
         {% for movie in movies %}
-            <li> {{movie.name}}, рейтинг - {{movie.rating}}, год - {{movie.year|default:"Неизвестно"}} </li>
+            <li><a href="{{movie.get_url}}">{{movie.name}}</a>,
+                рейтинг - {{movie.rating}}, год - {{movie.year|default:"Неизвестно"}} </li>
         {% endfor %}
     </ul>
 
