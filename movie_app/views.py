@@ -1,17 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Movie
+from django.db.models import F, Sum, Max, Min, Count, Avg
 
 
 # Create your views here.
 
 def show_all_movies(request):
-    movies = Movie.objects.all()
-
-    for movie in movies:
-        movie.save()
+    movies = Movie.objects.order_by(F('year').asc(nulls_first=True), 'rating')
+    agg = movies.aggregate(Avg('budget'), Max('rating'), Min('rating'), Count('id'))
 
     data = {
-        'movies': movies
+        'movies': movies,
+        'agg': agg,
+        'total': movies.count()
     }
     return render(request, 'movie_app/all_movies.html', context=data)
 
