@@ -79,7 +79,7 @@ class MovieModelTestCase(TestCase):
 
     def test_movie_change(self):
         self.print_info('Start test_movie_change')
-        Movie.objects.get(name='Mask').rating = 999
-        movie = Movie.objects.all(name='Mask')
+        movie = Movie.objects.get(name='Mask')
+        movie.rating = 999
         self.assertEqual(movie.rating, 999)
         self.print_info('Finish test_movie_change')
