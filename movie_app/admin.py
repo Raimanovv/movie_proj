@@ -4,9 +4,11 @@ from django.db.models import QuerySet
 
 # Register your models here.
 admin.site.register(Director)
-admin.site.register(Actor)
 
 
+@admin.register(Actor)
+class ActorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('first_name', 'last_name',)}
 
 
 class RatingFilter(admin.SimpleListFilter):

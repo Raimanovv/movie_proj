@@ -29,7 +29,11 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+    slug = models.SlugField(default='', null=False, db_index=True)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.first_name} {self.last_name}')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         if self.gender == self.MALE:
