@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех режиссеров</title>
+</head>
+<body>
+    <h2>Список всех режиссеров</h2>
+    <ul>
+        {% for director in directors %}
+            <li> <a href="{{director.get_url}}"> {{director}} </a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
