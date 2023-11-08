@@ -1,9 +1,14 @@
 from django.contrib import admin, messages
-from .models import Movie, Director, Actor
+from .models import Movie, Director, Actor, DressingRoom
 from django.db.models import QuerySet
 
 # Register your models here.
 admin.site.register(Director)
+
+
+@admin.register(DressingRoom)
+class DressingRoomAdmin(admin.ModelAdmin):
+    list_display = ['floor', 'number', 'actor']
 
 
 @admin.register(Actor)
@@ -44,7 +49,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_editable = ['rating', 'director', 'budget']
     filter_horizontal = ['actors']
     ordering = ['-rating', 'name']
-    list_per_page = 11
+    list_per_page = 20
     actions = ['set_dollars', 'set_euro']
     search_fields = ['name__iregex', 'rating']
     list_filter = ['name', 'currency', RatingFilter]
